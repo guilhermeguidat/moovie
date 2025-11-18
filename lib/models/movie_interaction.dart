@@ -1,5 +1,3 @@
-// lib/models/movie_interaction.dart
-
 class MovieInteraction {
   final int? id;
   final int userId;
@@ -7,9 +5,9 @@ class MovieInteraction {
   bool isWatched;
   bool isFavorite;
   bool isWantToWatch;
-  int? rating; // 1-5 estrelas
-  String? review; // Comentário do usuário
-  DateTime? watchedDate; // Data quando marcou como assistido
+  int? rating;
+  String? review;
+  DateTime? watchedDate;
 
   MovieInteraction({
     this.id,

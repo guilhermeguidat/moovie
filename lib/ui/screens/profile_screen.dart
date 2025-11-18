@@ -97,7 +97,6 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
     );
   }
 
-  // Aba do Perfil
   Widget _buildProfileTab(dynamic user) {
     return SingleChildScrollView(
       child: Padding(
@@ -164,7 +163,6 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
     );
   }
 
-  // Top 5 favoritos do usuário
   Widget _buildTopFavoritesSection() {
     return Container(
       padding: const EdgeInsets.all(20),
@@ -387,7 +385,6 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
     );
   }
 
-  // Aba da Sequência
   Widget _buildStreakTab(dynamic user) {
     return SingleChildScrollView(
       child: Padding(
@@ -519,9 +516,6 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
     );
   }
 
-
-
-  // Aba de Conquistas
   Widget _buildAchievementsTab(dynamic user) {
     return FutureBuilder<List<Movie>>(
       future: user.id != null ? context.read<MovieProvider>().getUserMovies(user.id!, 'isWatched') : Future.value(<Movie>[]),
@@ -736,7 +730,6 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
     ];
   }
 
-  // Aba de Atividade Recente
   Widget _buildActivityTab(dynamic user) {
     return FutureBuilder<List<MovieInteraction>>(
       future: context.read<MovieProvider>().getRecentActivity(limit: 20),
@@ -775,7 +768,6 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
           );
         }
         
-        // Buscar os filmes correspondentes às interações
         final movieIds = interactions.map((i) => i.movieId).toList();
         
         return FutureBuilder<List<Movie>>(
@@ -818,7 +810,6 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
     );
   }
 
-  // Botão de sair removido desta tela
   Widget _buildEditProfileSection() {
     return Container(
       padding: const EdgeInsets.all(20),
@@ -943,8 +934,6 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                   return;
                 }
 
-                // Aqui você implementaria a lógica para atualizar o usuário
-                // Por enquanto, apenas fecha o diálogo
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Funcionalidade em desenvolvimento')),
@@ -990,10 +979,8 @@ class _TopFiveMovieSearchSheetState extends State<_TopFiveMovieSearchSheet> {
     final movieProvider = context.read<MovieProvider>();
     final currentList = await movieProvider.getTopFiveMovies();
     
-    // Verifica se já existe
     if (currentList.any((item) => item['movieId'] == m.id)) return;
     
-    // Adiciona o novo filme
     final newMovie = {
       'movieId': m.id,
       'title': m.title,
@@ -1003,7 +990,6 @@ class _TopFiveMovieSearchSheetState extends State<_TopFiveMovieSearchSheet> {
     
     final updatedList = [...currentList, newMovie];
     
-    // Mantém apenas os 5 primeiros
     if (updatedList.length > 5) {
       updatedList.removeRange(5, updatedList.length);
     }

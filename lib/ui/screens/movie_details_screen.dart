@@ -1,5 +1,3 @@
-// lib/ui/screens/movie_detail_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:moovie/models/movie.dart';
@@ -193,11 +191,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         child: ElevatedButton.icon(
                           onPressed: () async {
                             if (!_isWatched) {
-                              // Se não tem review, mostra o diálogo
                               if (_currentInteraction?.review == null || _currentInteraction!.review!.isEmpty) {
                                 await _showRatingDialog();
                               } else {
-                                // Se já tem review, apenas marca como assistido
                                 await context.read<MovieProvider>().toggleWatched(widget.movie);
                                 await _refreshInteraction();
                               }
@@ -254,7 +250,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Mostrar avaliação do usuário se existir
                       if (_currentInteraction?.rating != null)
                         _sectionCard(
                           title: 'Minha Avaliação',

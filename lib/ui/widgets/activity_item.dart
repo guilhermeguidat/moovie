@@ -41,7 +41,6 @@ class ActivityItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Poster do filme
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: SizedBox(
@@ -63,7 +62,6 @@ class ActivityItem extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 16),
-          // Informações do filme
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +77,6 @@ class ActivityItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
-                // Avaliação em estrelas
                 if (interaction.rating != null) ...[
                   Row(
                     children: [
@@ -102,7 +99,6 @@ class ActivityItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                 ],
-                // Comentário se houver
                 if (interaction.review?.isNotEmpty == true) ...[
                   Text(
                     interaction.review!,
@@ -116,7 +112,6 @@ class ActivityItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                 ],
-                // Data
                 Text(
                   _formatDate(interaction.watchedDate),
                   style: const TextStyle(

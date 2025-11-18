@@ -1,5 +1,3 @@
-// lib/database/database_helper.dart
-
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:moovie/models/user.dart';
@@ -30,7 +28,6 @@ class DatabaseHelper {
   }
 
   Future<void> _onCreate(Database db, int version) async {
-    // Tabela de usuários
     await db.execute('''
       CREATE TABLE users(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -46,7 +43,6 @@ class DatabaseHelper {
       )
     ''');
 
-    // Tabela de filmes
     await db.execute('''
       CREATE TABLE movies(
         id INTEGER PRIMARY KEY,
@@ -59,7 +55,6 @@ class DatabaseHelper {
       )
     ''');
 
-    // Tabela de interações com filmes
     await db.execute('''
       CREATE TABLE movie_interactions(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -76,7 +71,6 @@ class DatabaseHelper {
       )
     ''');
 
-    // Tabela de Top 5 Favoritos
     await db.execute('''
       CREATE TABLE top_five_movies(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -110,7 +104,6 @@ class DatabaseHelper {
       await db.execute('ALTER TABLE users ADD COLUMN username TEXT');
     }
     if (oldVersion < 6) {
-      // Criar tabela de Top 5 Favoritos
       await db.execute('''
         CREATE TABLE top_five_movies(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -227,7 +220,6 @@ class DatabaseHelper {
     );
   }
 
-  // Métodos para avaliações e sequências
   Future<List<MovieInteraction>> getRecentActivity(int userId, {int limit = 10}) async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
@@ -278,14 +270,13 @@ class DatabaseHelper {
       }
     }
 
-    // Verificar se a sequência é atual (último filme assistido ontem ou hoje)
     if (lastDate != null) {
       final today = DateTime.now();
       final todayOnly = DateTime(today.year, today.month, today.day);
       final daysSinceLastWatch = todayOnly.difference(lastDate).inDays;
       
       if (daysSinceLastWatch > 1) {
-        return 0; // Sequência quebrada
+        return 0;
       }
     }
 
@@ -349,13 +340,10 @@ class DatabaseHelper {
     return sum / ratings.length;
   }
 
-  // Top 5 Favoritos por usuário
   Future<void> saveTopFiveMovies(int userId, List<Map<String, dynamic>> movies) async {
     final db = await database;
-    // Remove registros antigos do usuário
     await db.delete('top_five_movies', where: 'userId = ?', whereArgs: [userId]);
     
-    // Insere novos registros
     for (int i = 0; i < movies.length; i++) {
       await db.insert('top_five_movies', {
         'userId': userId,
@@ -386,10 +374,8 @@ class DatabaseHelper {
 
   Future<void> reorderTopFiveMovies(int userId, List<int> newOrder) async {
     final db = await database;
-    // Remove todos os registros do usuário
     await db.delete('top_five_movies', where: 'userId = ?', whereArgs: [userId]);
     
-    // Insere na nova ordem
     for (int i = 0; i < newOrder.length; i++) {
       final movie = await db.query('top_five_movies', where: 'movieId = ?', whereArgs: [newOrder[i]]);
       if (movie.isNotEmpty) {

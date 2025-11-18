@@ -83,8 +83,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Botão de login social removido
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

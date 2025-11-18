@@ -63,7 +63,6 @@ class _RatingDialogState extends State<RatingDialog> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
-            // Widget de estrelas
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(5, (index) {
@@ -95,7 +94,6 @@ class _RatingDialogState extends State<RatingDialog> {
               ),
               const SizedBox(height: 20),
             ],
-            // Campo de comentário
             TextField(
               controller: _reviewController,
               maxLines: 3,
@@ -115,7 +113,6 @@ class _RatingDialogState extends State<RatingDialog> {
               style: const TextStyle(color: Colors.white),
             ),
             const SizedBox(height: 24),
-            // Botões
             Row(
               children: [
                 Expanded(

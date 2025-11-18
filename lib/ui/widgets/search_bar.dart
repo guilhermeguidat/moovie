@@ -8,7 +8,6 @@ class CustomSearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navega para a tela de pesquisa
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const SearchScreen()),

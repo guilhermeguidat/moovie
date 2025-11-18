@@ -15,18 +15,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Usa addPostFrameCallback para garantir que o contexto esteja disponível
     WidgetsBinding.instance.addPostFrameCallback((_) => _checkUserStatus());
   }
 
   void _checkUserStatus() async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
-    // O método loadCurrentUser agora verifica se há um usuário logado
     await userProvider.loadCurrentUser();
     if (!mounted) return;
 
-    // Redireciona com base no status do usuário
     if (userProvider.user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const HomeScreen()),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:moovie/providers/user_provider.dart';
 import 'package:moovie/ui/screens/login_screen.dart';
 import 'package:provider/provider.dart';
-// Removida a barra inferior
 
 class ConfigScreen extends StatefulWidget {
   const ConfigScreen({super.key});
@@ -13,12 +12,9 @@ class ConfigScreen extends StatefulWidget {
 
 class _ConfigScreenState extends State<ConfigScreen> {
 
-  // Função para lidar com o logout do usuário
   void _logout() async {
-    // Chama o método logout do UserProvider para limpar o estado de login
     await Provider.of<UserProvider>(context, listen: false).logout();
 
-    // Navega de volta para a tela de login, limpando a pilha de navegação
     if (!mounted) return;
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => const LoginScreen()),
@@ -83,15 +79,13 @@ class _ConfigScreenState extends State<ConfigScreen> {
     );
   }
 
-  // Seção de idioma removida
-
   Widget _buildActionButtons() {
     return Column(
       children: [
         _buildRedButton(
           title: 'Sair da conta',
           icon: Icons.logout,
-          onPressed: _logout, // Conecta o botão à função de logout
+          onPressed: _logout,
         ),
         const SizedBox(height: 12),
         _buildRedButton(
@@ -121,10 +115,6 @@ class _ConfigScreenState extends State<ConfigScreen> {
       ),
     );
   }
-
-  // Widgets auxiliares removidos junto com a seção de idioma
-
-  // Toggle de tema removido
 
   Widget _buildRedButton({
     required String title,

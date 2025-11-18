@@ -43,14 +43,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (!mounted) return;
 
     if (errorMessage == null) {
-      // Navegar de volta para a tela de login com mensagem de sucesso
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const LoginScreen(),
         ),
       );
       
-      // Mostrar mensagem de sucesso na próxima tela
       WidgetsBinding.instance.addPostFrameCallback((_) {
         FeedbackHelper.showSuccessMessage(context, 'Cadastro realizado com sucesso! Faça login para continuar.');
       });

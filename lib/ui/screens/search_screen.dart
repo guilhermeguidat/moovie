@@ -364,7 +364,6 @@ class _SearchScreenState extends State<SearchScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () async {
-                        // Persiste no estado da tela e aplica
                         setState(() {
                           _selectedGenreId = tempGenreId;
                           _selectedYear = tempYear;

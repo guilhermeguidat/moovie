@@ -1,5 +1,3 @@
-// lib/providers/movie_provider.dart
-
 import 'package:flutter/material.dart';
 import 'package:moovie/database/database_helper.dart';
 import 'package:moovie/models/movie.dart';
@@ -86,7 +84,6 @@ class MovieProvider with ChangeNotifier {
         interaction.isWantToWatch = false;
         interaction.watchedDate = DateTime.now();
       } else {
-        // Mantemos rating/review salvos (não apagamos), apenas some da UI de recentes
         interaction.watchedDate = null;
       }
       await _dbHelper.updateMovieInteraction(interaction);
@@ -138,7 +135,6 @@ class MovieProvider with ChangeNotifier {
     return _favoriteMovieIds.contains(movieId);
   }
 
-  // Métodos para avaliações
   Future<void> rateMovie(Movie movie, int rating, String review) async {
     if (_currentUserId == null) return;
     await _dbHelper.insertMovie(movie);
@@ -222,7 +218,6 @@ class MovieProvider with ChangeNotifier {
     return await _dbHelper.getAverageRating(_currentUserId!);
   }
 
-  // Top 5 Favoritos
   Future<void> saveTopFiveMovies(List<Map<String, dynamic>> movies) async {
     if (_currentUserId == null) return;
     await _dbHelper.saveTopFiveMovies(_currentUserId!, movies);
