@@ -52,7 +52,7 @@ class MovieProvider with ChangeNotifier {
 
   Future<void> toggleWatched(Movie movie) async {
     if (_currentUserId == null) return;
-    await _dbHelper.insertMovie(movie); // Garante que o filme está salvo
+    await _dbHelper.insertMovie(movie);
     MovieInteraction? interaction = await getInteraction(movie.id);
 
     if (interaction == null) {
@@ -93,7 +93,7 @@ class MovieProvider with ChangeNotifier {
 
   Future<void> toggleFavorite(Movie movie) async {
     if (_currentUserId == null) return;
-    await _dbHelper.insertMovie(movie); // Garante que o filme está salvo
+    await _dbHelper.insertMovie(movie);
     MovieInteraction? interaction = await getInteraction(movie.id);
 
     if (interaction == null) {
